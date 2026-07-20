@@ -70,12 +70,20 @@ print('La moyenne centrée vaut',sum(liste[1:-1])/(N-2))
 
 """ Q3-3"""
 print('Valeur la plus proche de 0 :')
+N = int(input('Entrez le nb de valeurs choisi :'))
+liste = []
+for i in range(1, N+1):
+    texte = 'Entrez la valeur '+str(i)+' : '
+    liste.append(int(input(texte)))
+    liste.sort()
 i = 0
 while i < len(liste) and  liste[i] < 0:
     i += 1
 
 if i == len(liste):
     print(liste[-1])
+elif i ==0:
+    print(liste[0])
 else:
     if abs(liste[i-1]) <= abs(liste[i]):
         print(liste[i-1])
