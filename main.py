@@ -75,7 +75,7 @@ liste = []
 for i in range(1, N+1):
     texte = 'Entrez la valeur '+str(i)+' : '
     liste.append(int(input(texte)))
-    liste.sort()
+liste.sort()
 i = 0
 while i < len(liste) and  liste[i] < 0:
     i += 1
