@@ -1,3 +1,5 @@
+"""Q1"""
+"""
 for i in range(1, 10):
     for j in range(1, 10-i):
         print(" ", end="")
@@ -33,4 +35,11 @@ for i in range(1, 10):
         print(j, end="")
     for j in range(i-1,0,-1):
         print(j, end="")
-    print()
+    print()"""
+
+"""Q2"""
+n1 = int(input('Entrez un entier positif :'))
+n2 = int(input('Entrez un entier positif :'))
+
+liste = [n for n in range(1, min(n1, n2)+1) if n1 % n == 0 and n2 % n == 0]
+print(liste)
