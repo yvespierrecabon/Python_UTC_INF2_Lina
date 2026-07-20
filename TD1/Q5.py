@@ -15,7 +15,7 @@ inf2 = {
     "Violette ROMBOURG": 12,
     "Gaspard LAVAUD": 13,
     "Maria LABOSSE": 7,
-    "Basile DUMOULIN ": 12,
+    "Basile DUMOULIN": 12,
     "Chaowei XU": 15,
     "Minh NGUYEN": 9,
     "Morgane VERNIER": 17,
@@ -23,6 +23,8 @@ inf2 = {
 
 
 def get_moyenne_dico(dico:dict)->float:
+    if not dico:
+        return 0.0
     return sum(dico.values())/len(dico)
 
 
@@ -35,8 +37,8 @@ for etudiant,moyenne in inf2.items():
     else:
         etudiants_non_admis[etudiant] = moyenne
 
-
+print("etudiants admis")
 print(etudiants_admis)
-print('Moyenne :',get_moyenne_dico(etudiants_admis))
+print(f"Moyenne : {get_moyenne_dico(etudiants_admis):.2f}")
 print(etudiants_non_admis)
 print('Moyenne : ',get_moyenne_dico(etudiants_non_admis))
