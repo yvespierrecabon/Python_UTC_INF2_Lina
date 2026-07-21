@@ -3,7 +3,7 @@ import fcts_carre_magique as cm
 def sont_carres(*args) -> None:
     for carre in args:
         print(carre)
-        print(f"Carré magique  : {cm.est_carre_magique(carre)}")
+        print(f"Carré magique : {cm.est_carre_magique(carre)}")
         print(f"Carré magique normal : {cm.est_carre_magique_normal(carre)}")
 
 
