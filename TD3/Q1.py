@@ -2,8 +2,7 @@ import fcts_carre_magique as cm
 
 
 def test_carres(*args) -> None:
-    nb_carres = args[0]
-    for carre in args[1:]:
+    for carre in args:
         print(carre)
         print(f"Carré magique normal : {cm.est_carre_magique_normal(carre)}")
         print(f"Carré magique normal : {cm.est_carre_magique_normal(carre)}")
@@ -18,3 +17,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+main()
