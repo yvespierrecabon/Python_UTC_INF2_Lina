@@ -1,19 +1,16 @@
-
+from typing import List
 
 def calculer_polynome(x, **kwargs)->float:
     poly = 0
+    puissance = {"a": 3, "b": 2, "c": 1, "d": 0}
     for key, value in kwargs.items():
-        if key == 'a':
-            poly += value*(x**3)
-        elif key == 'b':
-            poly += value*(x**2)
-        elif key == 'c':
-            poly += value*x
-        elif key == 'd':
-            poly += value
+        if key not in puissance:
+            raise ValueError(f"Coefficient invalide : {key}")
+        else:
+            poly += value*(x**puissance[key])
     return poly
 
-def calculer_polynome_2(*args, **kwargs)->float:
+def calculer_polynome_2(*args, **kwargs)->List[float]:
     res = []
     for x in args:
         poly = 0
