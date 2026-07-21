@@ -1,15 +1,19 @@
 from typing import Tuple
 
 def nombre(fonction):
-    def wrapper(nb):
-        if  isinstance(nb,str) and isinstance(int(nb),int):
-            try:
-                nb = int(nb)
-            except ValueError:
+    def wrapper(*args, **kwargs):
+        nb = 0
+        if args:
+            nb = args[0]
+            if  isinstance(nb,str):
+                try:
+                    nb = int(nb)
+                except ValueError:
+                    nb = 0
+            elif not isinstance(nb,int|float):
                 nb = 0
-        else:
-            nb = 0
-        return fonction(nb)
+            args = (nb,) + args[1:]
+        return fonction(*args,**kwargs)
     return wrapper
 
 @nombre
@@ -37,7 +41,7 @@ def est_couicable(n)->bool:
         return False
     nb1,nb2 = separe_nombre(n)
     return somme_chiffres(nb1) == somme_chiffres(nb2)
-@nombre
+
 def somme_chiffres_rec(n:int)->int:
     n=abs(n)
     if n<10:
