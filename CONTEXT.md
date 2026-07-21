@@ -44,6 +44,7 @@
 
 - **`TD2/`** : Contient les exercices du TD2.
   - `Q1.py` : Solutions pour la question 1 (nombres couicables). **À corriger** : la logique de `est_couicable` doit comparer la **somme des chiffres** (et non le nombre de chiffres).
+  - `Q2.py` : Solutions pour la question 2 (carré magique). **À corriger** : `somme_colonne` utilise `mat[:][i]` (incorrect).
   - `Correction-TD2.pdf` : Correction du TD2 (à vérifier).
   - `TD2.pdf` : Énoncé du TD2 (lu et analysé).
 
@@ -55,7 +56,7 @@
 ## 🚀 **Dernières Actions**
 *(Référence rapide aux dernières actions menées - voir AVANCEMENT.md pour l'historique complet)*
 - **Dernière Mise à Jour** : 21-07-2026 06:41
-- **Dernière Tâche** : Ajout de `CONTEXT.md` et `AVANCEMENT.md` au dépôt GitHub + analyse de `TD2/Q1.py`.
+- **Dernière Tâche** : Ajout de `CONTEXT.md` et `AVANCEMENT.md` au dépôt GitHub + analyse de `TD2/Q1.py` et `TD2/Q2.py`.
 
 ---
 
@@ -65,6 +66,7 @@
   - Respecter les énoncés des TDs (ex: `est_couicable` doit comparer la **somme des chiffres**, pas le nombre de chiffres).
 - **Problèmes Connus** :
   - **`TD2/Q1.py`** : La fonction `est_couicable` a une logique incorrecte (correction proposée dans `AVANCEMENT.md`).
+  - **`TD2/Q2.py`** : La fonction `somme_colonne` utilise `mat[:][i]` (incorrect, doit être corrigé).
 - **Bonnes Pratiques** :
   - Les solutions sont organisées dans des **sous-répertoires par TD** (`TD1/`, `TD2/`).
   - Utiliser `.gitkeep` pour conserver les répertoires vides dans Git.
@@ -74,10 +76,16 @@
 
 ## 🔄 **Règles de Travail**
 1. **Persistance** : Ce fichier doit être lu **à chaque nouvelle session** pour maintenir le contexte.
-2. **Mises à Jour** : 
+2. **Synchronisation Systematicque** :
+   - **À chaque demande d'analyse de fichier**, je dois **toujours commencer par synchroniser le dépôt GitHub avec la sandbox** via :
+     ```bash
+     cd /workspace/yvespierrecabon__Python_UTC_INF2_Lina && git fetch --all && git pull origin main
+     ```
+   - Cela garantit que j'analyse **la dernière version** des fichiers poussés par l'utilisateur.
+3. **Mises à Jour** : 
    - Mettre à jour ce fichier **après chaque tâche significative**.
    - Toujours vérifier la cohérence avec `AVANCEMENT.md`.
-3. **Clarté** : 
+4. **Clarté** : 
    - Utiliser des sections claires (`##`, `###`).
    - Privilégier les listes à puces pour les éléments dynamiques.
 
@@ -86,13 +94,8 @@
 ## 📅 **Prochaines Étapes**
 *(Idées ou tâches planifiées pour les prochaines sessions)*
 - [ ] Corriger `est_couicable` dans `TD2/Q1.py` (voir analyse dans `AVANCEMENT.md`).
-- [ ] Implémenter les fonctions pour le **carré magique** (Q2 du TD2) :
-  - `somme_ligne(mat, i)`
-  - `somme_colonne(mat, j)`
-  - `somme_diag1(mat)`
-  - `somme_diag2(mat)`
-  - `magique(mat)`
-  - `carre_magique_normal(mat)`
+- [ ] Corriger `somme_colonne` dans `TD2/Q2.py` (remplacer `mat[:][i]` par `sum(row[j] for row in mat)`).
+- [ ] Implémenter `carre_magique_normal(mat)` (Q2, question 6 du TD2).
 - [ ] Ajouter des tests unitaires pour valider les solutions.
 - [ ] Vérifier la cohérence des fichiers `Qx.py` avec les énoncés des TDs.
 
