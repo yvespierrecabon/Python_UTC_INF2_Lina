@@ -1,19 +1,18 @@
 from typing import Tuple
 
 def nombre(fonction):
-    def wrapper(*args, **kwargs):
-        nb = 0
+    def wrapper(*args):
         if args:
             nb = args[0]
             if  isinstance(nb,str):
                 try:
-                    nb = int(nb)
+                    nb = max(0,int(nb))
                 except ValueError:
                     nb = 0
             elif not isinstance(nb,int|float):
                 nb = 0
             args = (nb,) + args[1:]
-        return fonction(*args,**kwargs)
+        return fonction(*args)
     return wrapper
 
 @nombre
@@ -35,7 +34,7 @@ def separe_nombre(n:int)->Tuple[int,int]:
     sep = (len(str_nb)+1)//2
     return int(str_nb[:sep]),int(str_nb[sep:])
 
-@nombre
+
 def est_couicable(n)->bool:
     if nombre_chiffres(n)%2 != 0:
         return False
@@ -57,7 +56,9 @@ def main():
     print("Somme des chiffres :" ,somme_chiffres(1245678))
     print("Nombre de chiffres :" ,nombre_chiffres(1245678))
     print("Sépare en 2 :" ,separe_nombre(12345678))
-    print("Somme des chiffres :" ,somme_chiffres_rec(1245678))
+    print("Somme des chiffres récursive :" ,somme_chiffres_rec(1245678))
+    print("Somme des chiffres nb négatif:" ,somme_chiffres(-1245678))
+    print("Somme des chiffres pas nombre :" ,somme_chiffres("12 45678"))
 
     n = input("Entrez un nombre : ")
     if est_couicable(n):
