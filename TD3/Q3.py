@@ -16,6 +16,26 @@ def nombre(fonction):
         return fonction(nb)
     return wrapper
 
+"""def nombre(fonction):
+    def wrapper(*args, **kwargs):
+        if args:
+            nb = args[0]
+            if isinstance(nb, str):
+                try:
+                    nb = int(nb)
+                except ValueError:
+                    raise ValueError(f"Le paramètre '{nb}' n'est pas un nombre entier valide.")
+                if nb <= 0:
+                    raise ValueError(f"Le paramètre {nb} doit être un entier positif.")
+            elif not isinstance(nb, Union[int, float]):
+                raise TypeError(f"Le paramètre {nb} doit être un nombre ou une chaîne représentant un nombre.")
+            elif nb <= 0:
+                raise ValueError(f"Le paramètre {nb} doit être un entier positif.")
+            args = (nb,) + args[1:]
+        return fonction(*args, **kwargs)
+    return wrapper"""
+
+
 @nombre
 def somme_chiffres(n:int)->int:
     n = abs(n)
