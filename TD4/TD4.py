@@ -52,6 +52,21 @@ class Date:
     def __str__(self):
         return f'{self.j:02d}/{self.m:02d}/{self.a}'
 
+    def __lt__(self, other):
+        if self.a < other.a:
+            return True
+        elif self.a > other.a:
+            return False
+        else: # self.a == self.other
+            if self.m < other.m:
+                return True
+            elif self.m > other.m:
+                return False
+            else:
+                if self.j < other.j:
+                    return True
+                else:
+                    return False
 
 
 def main():
