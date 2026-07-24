@@ -100,7 +100,12 @@ class Individu:
         else:
             self._mort = data_deces
 
-
+    @property
+    def mort(self)->Date:
+        if self._mort is None:
+            raise Exception("cette personne est encore vivante")
+        else:
+            return self._mort
 
 
     
