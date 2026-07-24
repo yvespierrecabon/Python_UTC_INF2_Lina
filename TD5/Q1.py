@@ -1,6 +1,6 @@
 import os
 import PIL.Image as img
-from openpyxl.chart import series_factory
+
 
 
 class Note:
@@ -9,10 +9,13 @@ class Note:
         self._titre = titre
         Note._nb_notes += 1
 
-    def __del__(self):
-        if hasattr(Note, '_nb_notes'):  # Vérifie que _nb_notes existe
+    """def __del__(self):
+        try:
             Note._nb_notes -= 1
-
+        except AttributeError:
+            print(self._titre)
+            print("l'objet n'existe plus")
+            pass"""
 
     def get_titre(self)->str:
         return self._titre
@@ -74,21 +77,30 @@ class Image(Note):
 
 
 class Document(Note):
+    _nb_notes = 0
     def __init__(self, titre:str):
         super().__init__(titre)
         self._liste = []
+        
 
     def ajouter(self, note:Note)->None:
         self._liste.append(note)
+        Document._nb_notes += 1
 
     def supprimer_note(self, note:Note)->None:
-        self._liste.remove(note)
+        if note in self._liste:
+            self._liste.remove(note)
+            Document._nb_notes -= 1
+
 
     def print(self):
         print( f"{self._titre}")
         for note in self._liste:
             print(note)
 
+    @classmethod
+    def get_nb_notes(cls):
+        return Document._nb_notes
 
 ###########################################
 
@@ -104,7 +116,7 @@ document_1.ajouter(article_1)
 document_1.ajouter(image1)
 document_1.ajouter(article_2)
 document_1.print()
-print(f"Nombre de notes : {Note.get_nb_notes()}")
+print(f"Nombre de notes : {document_1.get_nb_notes()}")
 document_1.supprimer_note(article_2)
-print(f"Nombre de notes : {Note.get_nb_notes()}")
+print(f"Nombre de notes : {document_1.get_nb_notes()}")
 
