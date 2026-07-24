@@ -1,3 +1,6 @@
+from lief import exception
+
+
 class Date:
     JOURS_MAX = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
                  7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
@@ -36,7 +39,7 @@ class Date:
         else:
             raise ValueError(f"L'année {a} doit être strictement positive.")
 
-    def lendemain(self):
+    def lendemain(self)->"Date":
 
         new_j = self.j + 1
         new_m = self.m
@@ -76,6 +79,26 @@ class Individu:
     def __str__(self):
         return self._prenoms+" "+self._nom
 
+    @property
+    def nom(self) -> str:
+        return self._nom
+
+    @property
+    def prenoms(self) -> str:
+        return self._prenoms
+
+    @property
+    def naissance(self) -> Date:
+        return self._naissance
+
+    @mort.setter
+    def mort(self, data_deces : Date)->Date|None:
+        if self.mort is not None or data_deces < self._naissance:
+            raise Exception("Cette personne est déjà décédée")
+        elif data_deces < self._naissance:
+            raise Exception("La mort ne peut précéder la naissance ...")
+        else:
+            self._mort = data_deces
 
 
 
@@ -101,8 +124,6 @@ class Individu:
 
 
 def main():
-    date = Date(1,1,2026)
-
     date = Date(1, 1, 2026)
     while date.a == 2026:  # Tant qu'on est en 2026
         print(date, end=" ")
