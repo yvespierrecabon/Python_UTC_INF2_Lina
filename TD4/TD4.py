@@ -174,6 +174,12 @@ def main():
     print(mariage)
     Paul_berger.mort = Date(10,9,2024)
     print(Paul_berger)
+    try:
+        Paul_berger.mort = Date(1,9,2024)
+        print(Paul_berger)
+    except ValueError:
+        print('erreur de date')
+
 
 
 
