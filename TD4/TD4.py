@@ -1,5 +1,3 @@
-from lief import exception
-
 
 class Date:
     JOURS_MAX = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
@@ -92,36 +90,57 @@ class Individu:
         return self._naissance
 
     @mort.setter
-    def mort(self, data_deces : Date)->Date|None:
+    def mort(self, data_deces : Date)->None:
         if self.mort is not None or data_deces < self._naissance:
-            raise Exception("Cette personne est déjà décédée")
+            raise ValueError("Cette personne est déjà décédée")
         elif data_deces < self._naissance:
-            raise Exception("La mort ne peut précéder la naissance ...")
+            raise ValueError("La mort ne peut précéder la naissance ...")
         else:
             self._mort = data_deces
 
     @property
     def mort(self)->Date:
         if self._mort is None:
-            raise Exception("cette personne est encore vivante")
+            raise ValueError("cette personne est encore vivante")
         else:
             return self._mort
 
+##############################################################
+# Classe Lien
+##############################################################
+class Lien :
+    def __init__(self, i1:object, i2:object) :
+        if not isinstance(i1, Individu) or not isinstance(i2, Individu):
+            raise TypeError("type ’dindividu invalide ")
+        self._lien= (i1, i2) # packing de i1 et i2 dans un tuple
 
-    
+        def __str__(self) -> str :
+            return f"{self._lien[0]} et {self._lien[1]}"
 
-
-
-
-
-###############################################################
 
 
 ##############################################################
 # Classe Mariage
 ##############################################################
-"""class Mariage:
-    def __init__(self):"""
+class Mariage(Lien):
+    def __init__(self, i1:Individu, i2:Individu, date_mariage:Date) :
+        super().__init__(i1, i2)
+        self._date_mariage = date_mariage
+        self._date_divorce = None
+
+    def ajouter_divorce(self, date_divorce:Date) :
+        if date_divorce < self._date_mariage:
+            raise ValueError("La date du divorce ne peut précéder celle du mariage ...")
+        self._date_divorce = date_divorce
+
+
+    def __str__(self) -> str :
+       texte = f"Mariage entre {super().__str__()}"
+       if self._date_divorce is not None:
+           texte += f" . Divorce le {self._date_divorce}"
+       return texte
+
+
 
 
 
@@ -129,12 +148,25 @@ class Individu:
 
 
 def main():
-    date = Date(1, 1, 2026)
+    """date = Date(1, 1, 2026)
     while date.a == 2026:  # Tant qu'on est en 2026
         print(date, end=" ")
         date = date.lendemain()
         if date.j == 1:
-            print()  # Saut de ligne pour chaque nouveau mois
+            print()  # Saut de ligne pour chaque nouveau mois"""
+
+    Laura_Dupond = Individu("Dupond", "laura", Date(5,2,1986))
+    Paul_berger = Individu("Berger", 'paul', Date(1,7,1985))
+
+    mariage = Mariage(Laura_Dupond, Paul_berger, Date(25,2,2012))
+    Claire_dupond_Berger = Individu('Dupond-Berger','Claire',Date(1,7,1985))
+    mariage.ajouter_divorce(Date(26,8,2018))
+    print(Laura_Dupond)
+    print(Paul_berger)
+    print(Claire_dupond_Berger)
+    print(mariage)
+    mariage.ajouter_divorce(Date(26,8,2018))
+    print(mariage)
 
 
 
