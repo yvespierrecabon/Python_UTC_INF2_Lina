@@ -77,7 +77,7 @@ class Individu:
         return self._prenoms+" "+self._nom
 
 
-    
+
 
 
     
@@ -103,11 +103,12 @@ class Individu:
 def main():
     date = Date(1,1,2026)
 
-    for _ in range(365):
-        print(date, end = " ")
+    date = Date(1, 1, 2026)
+    while date.a == 2026:  # Tant qu'on est en 2026
+        print(date, end=" ")
         date = date.lendemain()
         if date.j == 1:
-            print()
+            print()  # Saut de ligne pour chaque nouveau mois
 
 
 
