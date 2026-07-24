@@ -60,6 +60,46 @@ class Date:
         return self.j < other.j
 
 
+##############################################################
+# Classe Individu
+##############################################################
+class Individu:
+    def __init__(self, nom:str, prenoms:str, naissance:Date):
+        self._nom = nom
+        self._prenoms = prenoms
+        self._naissance = naissance
+        self._mort = None
+
+    def est_mort(self)->bool:
+        return self._mort is not None
+
+    def __str__(self):
+        return self._prenoms+" "+self._nom
+
+
+    
+
+
+    
+
+
+
+
+
+###############################################################
+
+
+##############################################################
+# Classe Mariage
+##############################################################
+"""class Mariage:
+    def __init__(self):"""
+
+
+
+###############################################################
+
+
 def main():
     date = Date(1,1,2026)
 
