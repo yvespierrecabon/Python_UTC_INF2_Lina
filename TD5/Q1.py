@@ -7,11 +7,11 @@ class Note:
     _nb_notes = 0
     def __init__(self, titre:str):
         self._titre = titre
-        type(self)._nb_notes += 1
+        Note._nb_notes += 1
 
     def __del__(self):
         if hasattr(Note, '_nb_notes'):  # Vérifie que _nb_notes existe
-            type(self)._nb_notes -= 1
+            Note._nb_notes -= 1
 
 
     def get_titre(self)->str:
