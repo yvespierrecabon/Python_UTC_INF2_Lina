@@ -7,11 +7,11 @@ class Note:
     _nb_notes = 0
     def __init__(self, titre:str):
         self._titre = titre
-        Note._nb_notes += 1
+        type(self)._nb_notes += 1
 
     def __del__(self):
         if hasattr(Note, '_nb_notes'):  # Vérifie que _nb_notes existe
-            Note._nb_notes -= 1
+            type(self)._nb_notes -= 1
 
 
     def get_titre(self)->str:
@@ -22,6 +22,10 @@ class Note:
 
     def __str__(self):
         return self._titre
+
+    @classmethod
+    def get_nb_notes(cls):
+        return Note._nb_notes
 
 
 class Article(Note):
@@ -100,7 +104,7 @@ document_1.ajouter(article_1)
 document_1.ajouter(image1)
 document_1.ajouter(article_2)
 document_1.print()
-print(f"Nombre de notes : {Note._nb_notes}")
+print(f"Nombre de notes : {Note.get_nb_notes()}")
 document_1.supprimer_note(article_2)
-print(f"Nombre de notes : {Note._nb_notes}")
+print(f"Nombre de notes : {Note.get_nb_notes()}")
 
