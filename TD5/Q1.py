@@ -4,13 +4,14 @@ from openpyxl.chart import series_factory
 
 
 class Note:
-    nb_notes = 0
+    _nb_notes = 0
     def __init__(self, titre:str):
         self._titre = titre
-        Note.nb_notes += 1
+        Note._nb_notes += 1
 
     def __del__(self):
-        Note.nb_notes -= 1
+        if hasattr(Note, '_nb_notes'):  # Vérifie que _nb_notes existe
+            Note._nb_notes -= 1
 
 
     def get_titre(self)->str:
@@ -99,5 +100,7 @@ document_1.ajouter(article_1)
 document_1.ajouter(image1)
 document_1.ajouter(article_2)
 document_1.print()
-print(f"Nombre de notes : {Note.nb_notes}")
+print(f"Nombre de notes : {Note._nb_notes}")
+document_1.supprimer_note(article_2)
+print(f"Nombre de notes : {Note._nb_notes}")
 
