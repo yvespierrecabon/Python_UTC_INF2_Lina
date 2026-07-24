@@ -75,7 +75,9 @@ class Individu:
         return self._mort is not None
 
     def __str__(self):
-        return self._prenoms+" "+self._nom
+        if self._mort is None:
+            return self._prenoms+" "+self._nom
+        return f"{self._prenoms} {self._nom}, décédé le {self._mort}"
 
     @property
     def nom(self) -> str:
@@ -98,7 +100,7 @@ class Individu:
 
     @mort.setter
     def mort(self, data_deces : Date)->None:
-        if self.mort is not None:
+        if self._mort is not None:
             raise ValueError("Cette personne est déjà décédée")
         elif data_deces < self._naissance:
             raise ValueError("La mort ne peut précéder la naissance ...")
@@ -117,8 +119,8 @@ class Lien :
             raise TypeError("type ’dindividu invalide ")
         self._lien= (i1, i2) # packing de i1 et i2 dans un tuple
 
-        def __str__(self) -> str :
-            return f"{self._lien[0]} et {self._lien[1]}"
+    def __str__(self) -> str :
+        return f"{self._lien[0]} et {self._lien[1]}"
 
 
 
@@ -158,16 +160,16 @@ def main():
         if date.j == 1:
             print()  # Saut de ligne pour chaque nouveau mois"""
 
-    Laura_Dupond = Individu("Dupond", "laura", Date(5,2,1986))
-    Paul_berger = Individu("Berger", 'paul', Date(1,7,1985))
+    Laura_Dupond = Individu("Dupond", "Laura", Date(5,2,1986))
+    Paul_berger = Individu("Berger", 'Paul', Date(1,7,1985))
 
     mariage = Mariage(Laura_Dupond, Paul_berger, Date(25,2,2012))
     Claire_dupond_Berger = Individu('Dupond-Berger','Claire',Date(1,7,1985))
-    mariage.ajouter_divorce(Date(26,8,2018))
     print(Laura_Dupond)
     print(Paul_berger)
     print(Claire_dupond_Berger)
     print(mariage)
+    print("Divorce")
     mariage.ajouter_divorce(Date(26,8,2018))
     print(mariage)
     Paul_berger.mort = Date(10,9,2024)
