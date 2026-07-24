@@ -89,21 +89,24 @@ class Individu:
     def naissance(self) -> Date:
         return self._naissance
 
-    @mort.setter
-    def mort(self, data_deces : Date)->None:
-        if self.mort is not None or data_deces < self._naissance:
-            raise ValueError("Cette personne est déjà décédée")
-        elif data_deces < self._naissance:
-            raise ValueError("La mort ne peut précéder la naissance ...")
-        else:
-            self._mort = data_deces
-
     @property
     def mort(self)->Date:
         if self._mort is None:
             raise ValueError("cette personne est encore vivante")
         else:
             return self._mort
+
+    @mort.setter
+    def mort(self, data_deces : Date)->None:
+        if self.mort is not None:
+            raise ValueError("Cette personne est déjà décédée")
+        elif data_deces < self._naissance:
+            raise ValueError("La mort ne peut précéder la naissance ...")
+        else:
+            self._mort = data_deces
+
+
+
 
 ##############################################################
 # Classe Lien
@@ -167,7 +170,8 @@ def main():
     print(mariage)
     mariage.ajouter_divorce(Date(26,8,2018))
     print(mariage)
-
+    Paul_berger.mort = Date(10,9,2024)
+    print(Paul_berger)
 
 
 
