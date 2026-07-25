@@ -1,13 +1,27 @@
 # Historique d'Avancement - Session Python UTC INF2 Lina
 
-## 📜 **Journal des Actions**
+## **Journal des Actions**
 *(Ordre chronologique inverse : les actions les plus récentes en premier)*
 
 ---
 
-### 🔹 **Session du 21-07-2026**
+### **Session du 25-07-2026**
 
-#### ✅ **Actions Réalisées**
+#### **Actions Réalisées**
+- **12:22** : **Ajout du répertoire `TP3_Objets/`** avec ses fichiers.
+  - **Objectif** : Centraliser les exercices du TP3 (Objets) dans un répertoire dédié.
+  - **Fichiers Ajoutés** :
+    - `TP3_Objets/TP3_Sujet.pdf` (énoncé du TP3).
+    - `TP3_Objets/pokemons.py` (implémentation de la classe Pokemon).
+    - `TP3_Objets/poupees_russes.py` (implémentation des poupées russes).
+    - `TP3_Objets/rectangle.py` (implémentation de la classe Rectangle).
+  - **Statut** : ✅ Terminé
+
+---
+
+### **Session du 21-07-2026**
+
+#### **Actions Réalisées**
 - **10:30** : **Analyse du décorateur `nombre` dans `TD3/Q3.py`** (Q3 du TD3 - Décorateur et exceptions).
   - **Objectif** : Vérifier l'implémentation du décorateur `@nombre` pour transformer les chaînes en nombres.
   - **Fichiers Analysés** :
@@ -32,7 +46,7 @@
       > ```bash
       > cd /workspace/yvespierrecabon__Python_UTC_INF2_Lina && git fetch --all && git pull origin main
       > ```"
-  - **Commit** : [`61e9aac`](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/61e9aac)
+  - **Commit** : [61e9aac](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/61e9aac)
   - **Statut** : ✅ Terminé
 
 - **07:05** : **Analyse du code `TD2/Q2.py`** (carré magique).
@@ -53,7 +67,7 @@
   - **Fichiers Modifiés** :
     - `CONTEXT.md` (ajout)
     - `AVANCEMENT.md` (ajout)
-  - **Commit** : [`c5c54d3`](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/c5c54d3)
+  - **Commit** : [c5c54d3](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/c5c54d3)
   - **Statut** : ✅ Terminé
 
 - **06:30** : **Analyse du code `TD2/Q1.py`** et lecture de l'énoncé dans `TD2.pdf`.
@@ -72,36 +86,36 @@
     - **Q2** : Carrés magiques (somme des lignes/colonnes/diagonales, vérification de normalité).
   - **Statut** : ✅ Terminé
 
-#### 📌 **Contexte de la Session**
+#### **Contexte de la Session**
 - **Demande Utilisateur** : Analyser le décorateur `nombre` dans `TD3/Q3.py` et répondre à la question sur la suppression de `**kwargs`.
 - **Répertoire de Travail** : `/workspace/yvespierrecabon__Python_UTC_INF2_Lina`
 - **Outils Utilisés** : `git fetch`, `git pull`, analyse manuelle du code.
 
-#### ⚠️ **Problèmes Rencontrés**
+#### **Problèmes Rencontrés**
 - Aucun problème technique. **Problèmes logiques mineurs** dans le décorateur (syntaxe Python 3.10+, initialisation inutile).
 
-#### 🔍 **Observations**
+#### **Observations**
 - Le décorateur `nombre` est maintenant **fonctionnel** après les corrections apportées.
 - La question sur la suppression de `**kwargs` a été répondue : **oui, dans ce cas précis, `**kwargs` peut être supprimé** car les fonctions décorées n'utilisent que des arguments positionnels.
 
 ---
 
-### 🔹 **Session du 20-07-2026**
+### **Session du 20-07-2026**
 
-#### ✅ **Actions Réalisées**
+#### **Actions Réalisées**
 - **20:34** : Réorganisation du dépôt : déplacement des fichiers dans `TD1/` et création de `TD2/`.
   - **Objectif** : Structurer le dépôt pour séparer les TDs (TD1 pour les exercices actuels, TD2 pour les futurs).
   - **Fichiers Modifiés** :
     - Déplacement de `Q1.py`, `Q2.py`, `Q3.py`, `Q4.py`, `Q5.py`, `TD1.pdf` → `TD1/`
     - Création de `TD2/.gitkeep` (pour conserver le répertoire vide dans Git).
-  - **Commit** : [`c8c9d5f`](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/c8c9d5f)
+  - **Commit** : [c8c9d5f](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/c8c9d5f)
   - **Statut** : ✅ Terminé
 
 - **15:30** : Suppression du fichier `main.py` du dépôt GitHub.
   - **Objectif** : Nettoyer le dépôt pour utiliser uniquement les fichiers `Qx.py` (Q1.py, Q2.py, etc.).
   - **Fichiers Modifiés** : 
     - `main.py` (suppression)
-  - **Commit** : [`01760c5`](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/01760c5)
+  - **Commit** : [01760c5](https://github.com/yvespierrecabon/Python_UTC_INF2_Lina/commit/01760c5)
   - **Statut** : ✅ Terminé
 
 - **15:07** : Création des fichiers `CONTEXT.md` et `AVANCEMENT.md` pour le suivi persistant des sessions.
@@ -111,64 +125,66 @@
     - `/workspace/AVANCEMENT.md` (création)
   - **Statut** : ✅ Terminé
 
-#### 📌 **Contexte de la Session**
+#### **Contexte de la Session**
 - **Demande Utilisateur** : Réorganiser le dépôt en déplaçant les fichiers dans `TD1/` et créer `TD2/` pour les futurs exercices.
 - **Répertoire de Travail** : `/workspace/yvespierrecabon__Python_UTC_INF2_Lina`
 - **Outils Utilisés** : `git mv`, `git add`, `git commit`, `git push`
 
-#### ⚠️ **Problèmes Rencontrés**
+#### **Problèmes Rencontrés**
 - Aucun.
 
-#### 🔍 **Observations**
+#### **Observations**
 - Le `pull` initial a récupéré les commits `84d838a` (Q5) et `3ed3c1c` (Merge), ce qui a restauré `Q4.py` et `Q5.py` dans le répertoire racine.
 - Ces fichiers ont été déplacés vers `TD1/` avant le commit.
 - `.gitkeep` a été ajouté à `TD2/` pour le conserver dans Git (car Git ne suit pas les répertoires vides).
 
 ---
 
-### 🔹 **Modèle pour les Futures Sessions**
-*(À copier/coller pour chaque nouvelle session)*
+### **Modèle pour les Futures Sessions**
+*À copier/coller pour chaque nouvelle session*
 
-#### ✅ **Actions Réalisées**
+#### **Actions Réalisées**
 - **HH:MM** : [Description de l'action]
   - **Objectif** : [Pourquoi cette action ?]
   - **Fichiers Modifiés** : [Liste des fichiers]
-  - **Statut** : ✅ Terminé / ⏳ En Cours / ❌ Bloqué
+  - **Statut** : ✅ Terminé / 🔄 En Cours / ❌ Bloqué
 
-#### 📌 **Contexte de la Session**
+#### **Contexte de la Session**
 - **Demande Utilisateur** : [Résumé de la demande]
 - **Répertoire de Travail** : [Chemin]
 - **Outils Utilisés** : [Liste]
 
-#### ⚠️ **Problèmes Rencontrés**
+#### **Problèmes Rencontrés**
 - [Description du problème et solution apportée, le cas échéant]
 
-#### 🔍 **Observations**
+#### **Observations**
 - [Notes ou informations utiles pour les prochaines sessions]
 
 ---
 
-## 📊 **Résumé des Tâches par Type**
-*(À mettre à jour régulièrement)*
+## **Résumé des Tâches par Type**
+*À mettre à jour régulièrement*
 
 | **Type**          | **Nombre** | **Dernière Action**       |
 |-------------------|------------|---------------------------|
 | Analyse de code   | 3          | 21-07-2026 (TD3/Q3.py - décorateur `nombre`) |
 | Réorganisation    | 1          | 20-07-2026 (TD1/ et TD2/)  |
-| Mise à jour documentation | 2      | 21-07-2026 (CONTEXT.md et AVANCEMENT.md) |
+| Mise à jour documentation | 2      | 25-07-2026 (CONTEXT.md et AVANCEMENT.md) |
 | Création de fichiers | 2      | 20-07-2026 (CONTEXT/AVANCEMENT) |
 | Suppression        | 1          | 20-07-2026 (main.py)      |
+| Ajout de TP/TD     | 1          | 25-07-2026 (TP3_Objets/)  |
 
 ---
 
-## 🔄 **Tâches en Cours**
-*(À mettre à jour si une tâche est interrompue)*
+## **Tâches en Cours**
+*À mettre à jour si une tâche est interrompue*
 - Aucune tâche en cours.
 
 ---
 
-## 📅 **Calendrier des Sessions**
-*(Optionnel : pour suivre la fréquence des sessions)*
+## **Calendrier des Sessions**
+*Optionnel : pour suivre la fréquence des sessions*
+- **25-07-2026** : Session 7 (Ajout de TP3_Objets/)
 - **21-07-2026** : Session 6 (Analyse du décorateur `nombre` dans TD3/Q3.py)
 - **21-07-2026** : Session 5 (Mise à jour de CONTEXT.md et analyse de TD2/Q2.py)
 - **21-07-2026** : Session 4 (Analyse de TD2/Q1.py et ajout des fichiers de suivi au dépôt)
@@ -178,16 +194,16 @@
 
 ---
 
-## 🏷️ **Tags Utilisés**
-*(Pour catégoriser les actions dans l'historique)*
-- `✅` : Tâche terminée
-- `⏳` : Tâche en cours
-- `❌` : Tâche bloquée
-- `📌` : Contexte important
-- `⚠️` : Problème ou attention
-- `🔍` : Observation
-- `📜` : Documentation
+## **Tags Utilisés**
+*Pour catégoriser les actions dans l'historique*
+- ✅ : Tâche terminée
+- 🔄 : Tâche en cours
+- ❌ : Tâche bloquée
+- 📌 : Contexte important
+- ⚠️ : Problème ou attention
+- 🔍 : Observation
+- 📄 : Documentation
 
 ---
 
-*Dernière modification : 21-07-2026 10:30*
+*Dernière modification : 25-07-2026*
