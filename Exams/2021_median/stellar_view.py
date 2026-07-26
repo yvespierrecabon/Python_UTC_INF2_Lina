@@ -5,20 +5,20 @@ class ObjetCeleste:
     index:Dict[str,"ObjetCeleste"]={}
 
     def __init__(self, designation:str):
-        self.liste_designation:List[str] = []
+        self._liste_designation:List[str] = []
         self.ajouter_designation(designation)
 
     def ajouter_designation(self, designation:str):
-        if designation in self.liste_designation:
-            raise Exception(f"Designation {designation} already exists")
-        self.liste_designation.append(designation)
+        if designation in self._liste_designation:
+            raise ValueError(f"Designation {designation} already exists")
+        self._liste_designation.append(designation)
         ObjetCeleste.index[designation] = self
 
-    def get_designation(self):
-        return self.liste_designation
+    def get_designations(self):
+        return self._liste_designation
 
     def __str__(self):
-        return str(self.get_designation())
+        return str(self.get_designations())
 
     @classmethod
     def get_objet_celeste(cls, designation:str):
@@ -31,29 +31,29 @@ class ObjetCeleste:
 class Etoile(ObjetCeleste):
     def __init__(self, designation:str, magnitude:float):
         super().__init__(designation)
-        self.magnitude = magnitude
+        self._magnitude = magnitude
 
     def get_magnitude(self):
-        return self.magnitude
+        return self._magnitude
 
     def set_magnitude(self, magnitude:float):
         if isinstance(magnitude, float):
-            self.magnitude = magnitude
+            self._magnitude = magnitude
 
 
 class Constellation(ObjetCeleste):
     def __init__(self, designation:str, etoile_1:Etoile, etoile_2:Etoile):
         super().__init__(designation)
-        self.liste_etoile = []
-        self.liste_etoile.append(etoile_1)
-        self.liste_etoile.append(etoile_2)
-        super().ajouter_designation(etoile_1.get_designation()[0])
-        super().ajouter_designation(etoile_2.get_designation()[0])
+        self._liste_etoile = []
+        self._liste_etoile.append(etoile_1)
+        self._liste_etoile.append(etoile_2)
+        super().ajouter_designation(etoile_1.get_designations()[0])
+        super().ajouter_designation(etoile_2.get_designations()[0])
 
 
     def ajouter_etoile(self, etoile:Etoile):
-        if etoile in self.liste_etoile:
-            self.liste_etoile.append(etoile)
+        if etoile not in self._liste_etoile:
+            self._liste_etoile.append(etoile)
 
 
 
