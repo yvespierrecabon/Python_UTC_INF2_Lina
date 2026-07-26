@@ -31,14 +31,18 @@ class Covoit:
         return self._date_depart
 
     def ajouter_passager(self, login: str):
-        if (
-            login != self._login
-            and login not in self._passagers
-            and len(self._passagers) < self._nb_place
-        ):
-            self._passagers.append(login)
+        if login == self._login:
+            print("Le passager ne peut pas être conducteur")
+            return
+        if login in self._passagers:
+            print("Le passager est déjà passager")
+            return
+        if len(self._passagers) >= self._nb_place:
+            print("Covoit plein")
+            return
         else:
-            print("Impossible d'ajouter", login)
+            self._passagers.append(login)
+
 
     def supprimer_passager(self, login: str):
         if login in self._passagers:
@@ -53,6 +57,9 @@ class Covoit:
             and self._ville_destination == other.get_ville_destination()
             and self._date_depart == other.get_date_depart()
         )
+
+    def __str__(self):
+        return f"Conducteur : {self._login} - Départ : {self._ville_source} - Destination : {self._ville_destination}"
 
 
 def calcul_decalage(date_1: datetime, date_2: datetime) -> int:
@@ -96,13 +103,8 @@ def main():
     ajouter_un_covoiturage(c1, covoits)
     ajouter_un_covoiturage(c2, covoits)
     ajouter_un_covoiturage(c3, covoits)
-    print(
-        f"Correspondant = {
-            rechercher_covoiturage(
-                covoits, 'Rennes', 'Compiegne', datetime(2022, 4, 18, 9, 40)
-            )
-        }"
-    )
+    for covoit in rechercher_covoiturage(covoits, datetime(2022, 4, 18, 9, 40), 'Rennes', 'Compiègne'):
+        print(covoit)
 
 
 if __name__ == "__main__":
