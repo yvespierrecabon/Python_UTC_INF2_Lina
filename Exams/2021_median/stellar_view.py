@@ -1,5 +1,4 @@
-from typing import List, Dict
-
+from typing import List, Dict, Optional
 
 class ObjetCeleste:
     index: Dict[str, "ObjetCeleste"] = {}
@@ -8,7 +7,7 @@ class ObjetCeleste:
         self._liste_designation: List[str] = []
         self.ajouter_designation(designation)
 
-    def ajouter_designation(self, designation: str):
+    def ajouter_designation(self, designation: str)->None:
         if not isinstance(designation, str):
             raise TypeError("La désignation doit être de type str")
         if designation in self._liste_designation:
@@ -19,11 +18,11 @@ class ObjetCeleste:
     def get_designations(self):
         return self._liste_designation
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"ObjetCeleste(désignations={self.get_designations()})"
 
     @classmethod
-    def get_objet_celeste(cls, designation: str):
+    def get_objet_celeste(cls, designation: str) -> Optional["ObjetCeleste"]:
         if designation in ObjetCeleste.index:
             return ObjetCeleste.index[designation]
         else:
@@ -35,7 +34,7 @@ class Etoile(ObjetCeleste):
         super().__init__(designation)
         self._magnitude = magnitude
 
-    def get_magnitude(self):
+    def get_magnitude(self) -> float:
         return self._magnitude
 
     def set_magnitude(self, magnitude: float) -> None:
