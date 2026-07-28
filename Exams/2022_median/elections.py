@@ -1,3 +1,4 @@
+import os
 from typing import List, Dict
 
 def creer_dictionnaire_candidats(liste:List[str]) -> Dict[str, int]:
@@ -6,13 +7,57 @@ def creer_dictionnaire_candidats(liste:List[str]) -> Dict[str, int]:
         dictionnaire_candidats[candidat] = 0
     return dictionnaire_candidats
 
+def lancer_depouillement(dico:Dict[str,int]) -> None:
+    continuer = True
+    while continuer:
+        nom_candidat = input("Nom du candidat : ")
+        if nom_candidat in dico:
+            dico[nom_candidat] += 1
+        elif nom_candidat =='':
+            dico['Blanc'] += 1
+        elif nom_candidat not in dico:
+            dico['Nul'] += 1
+        suite = input('Continuer ? o / n')
+        if suite == 'n':
+            continuer = False
+
+def enregistrer_resultats(ville:str, num_bureau:int, dico:Dict[str,int]) -> None:
+    fichier = ville+'_'+str(num_bureau)+'.txt'
+    if fichier in os.listdir():
+        raise Exception('Le fichier existe déjà')
+    else:
+        with open(fichier, 'a') as file:
+            for candidat in dico:
+                if candidat not in ('Nul','Blanc'):
+                    file.write(candidat+' | '+str(dico[candidat])+'\n')
+            file.write('Nul | '+str(dico['Nul'])+'\n')
+            file.write('Blanc | '+str(dico['Blanc']))
+
+def afficher_resultats(dico:Dict[str,int]) -> None:
+    total_exprimes = 0
+    total_nuls= dico['Nul']
+    total_blancs= dico['Blanc']
+    for candidat, nb_votant in dico:
+        if candidat not in ('Nul','Blanc'):
+            total_exprimes += dico[candidat]
+    total_votants = total_exprimes + total_blancs+total_nuls
+    print(f"Total votants = {total_votants}")
+    printf(f"Total exprimés = {(total_exprimes//total_votants)}% ({total_exprimes})")
+    printf(f"Blancs = {int(100*total_blancs/total_votants)}% ({total_blancs})")
+    printf(f"Nuls = {int(100*total_nuls/total_votants)}% ({total_nuls})")
+    for candidat, nb_votant in dico:
+        printf(f"{candidat} = {int(100*dico[candidat]/total_exprimes)}% ({dico[candidat]})")
+
+
 
 
 def main():
-    pass
+    dico_candidats = creer_dictionnaire_candidats(['yves', 'corine', 'sedra'])
+    lancer_depouillement(dico_candidats)
+    afficher_resultats(dico_candidats)
 
 
 
 
- if __name__ == '__main__':
+if __name__ == '__main__':
     main()
