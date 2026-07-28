@@ -1,0 +1,5 @@
+yves | 3
+corine | 0
+sedra | 2
+Nul | 6
+Blanc | 0

@@ -27,9 +27,9 @@ def enregistrer_resultats(ville:str, num_bureau:int, dico:Dict[str,int]) -> None
         raise FileExistsError('Le fichier existe déjà')
     else:
         with open(fichier, 'w') as file:
-            for candidat in dico:
+            for candidat, nb_voix in dico.items():
                 if candidat not in ('Nul','Blanc'):
-                    file.write(candidat+' | '+str(dico[candidat])+'\n')
+                    file.write(candidat+' | '+str(nb_voix)+'\n')
             file.write('Nul | '+str(dico['Nul'])+'\n')
             file.write('Blanc | '+str(dico['Blanc']))
 
@@ -56,6 +56,7 @@ def main():
     dico_candidats = creer_dictionnaire_candidats(['yves', 'corine', 'sedra'])
     lancer_depouillement(dico_candidats)
     afficher_resultats(dico_candidats)
+    enregistrer_resultats('Angers',4, dico_candidats)
 
 
 
