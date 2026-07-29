@@ -30,7 +30,7 @@ class PriorityTask(Task):
     def __init__(self, id: str, duree: int, priority):
         super().__init__(id, duree)
         if 0 <= priority <= 100:
-            self.priority = priority
+            self.priority:int = priority
         else:
             raise ValueError('La priorité est un nombre entier compris entr 0 et 100')
         
@@ -41,7 +41,7 @@ class PriorityTask(Task):
         if 0 <= priority <= 100:
             self.priority = priority
         else:
-            raise ValueError("La priorité est un nombre entier compris entr 0 et 100")
+            raise ValueError("La priorité est un nombre entier compris entre 0 et 100")
             
     def __str__(self):
         return f"{super().__str__()}, priorité={self.priority}"
@@ -77,17 +77,25 @@ class Constraint():
 
 
 def main():
-    T2 = Task('T2', 100)
-    T3 = PriorityTask('T3', 100, 50)
-    T4 = PriorityTask('T4', 100, 60)
+    try:
+        T2 = Task('T2', 100)
+        T3 = PriorityTask('T3', 100, 50)
+        T4 = PriorityTask('T4', 100, 60)
 
-    constraint = Constraint()
-    constraint.add_constraint('T3', T4.get_id())
-    constraint.add_constraint('T3', T2.get_id())
-    for key, value in constraint.dico.items():
-        print(f"{key} = {value}")
-    constraint.print_constraint('T2')
-    constraint.print_constraint('T3')
+        constraint = Constraint()
+        constraint.add_constraint('T3', T4.get_id())
+        constraint.add_constraint('T3', T2.get_id())
+        constraint.add_constraint('T3', T2.get_id())
+        for key, value in constraint.dico.items():
+            print(f"{key} = {value}")
+        constraint.print_constraint('T2')
+        constraint.print_constraint('T3')
+    except TypeError as e:
+        print(f"Erreur de type : {e}")
+    except ValueError as e:
+        print(f"Valeur invalide : {e}")
+    except Exception as e:
+        print(f"Erreur inattendue : {e}")
 
 
 if __name__ == "__main__":
