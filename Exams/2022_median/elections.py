@@ -60,7 +60,7 @@ def main():
     dico_candidats = creer_dictionnaire_candidats(['yves', 'corine', 'sedra'])
     lancer_depouillement(dico_candidats)
     afficher_resultats(dico_candidats)
-    enregistrer_resultats('Compiègne',19, dico_candidats)
+    enregistrer_resultats('Compiegne',19, dico_candidats)
 
 
 
