@@ -13,7 +13,7 @@ def lancer_depouillement(dico:Dict[str,int]) -> None:
         nom_candidat = input("Nom du candidat : ")
         if nom_candidat in dico:
             dico[nom_candidat] += 1
-        elif nom_candidat.strip().lower() =='Blanc':
+        elif nom_candidat.strip().lower() =='blanc':
             dico['Blanc'] += 1
         elif nom_candidat not in dico:
             dico['Nul'] += 1
@@ -33,13 +33,17 @@ def enregistrer_resultats(ville:str, num_bureau:int, dico:Dict[str,int]) -> None
             file.write('Nul | '+str(dico['Nul'])+'\n')
             file.write('Blanc | '+str(dico['Blanc']))
 
-def afficher_resultats(dico:Dict[str,int]) -> None:
+def nombre_votants(dico:Dict[str,int]) -> tuple:
     total_exprimes = 0
     total_nuls= dico['Nul']
     total_blancs= dico['Blanc']
     for candidat, nb_votant in dico.items():
         if candidat not in ('Nul','Blanc'):
             total_exprimes += dico[candidat]
+    return total_exprimes, total_nuls, total_blancs
+
+def afficher_resultats(dico:Dict[str,int]) -> None:
+    total_exprimes, total_nuls, total_blancs= nombre_votants(dico)
     total_votants = total_exprimes + total_blancs+total_nuls
     print(f"Total votants = {total_votants}")
     print(f"Total exprimés = {(100*total_exprimes/total_votants):.2f}% ({total_exprimes})")
@@ -56,7 +60,7 @@ def main():
     dico_candidats = creer_dictionnaire_candidats(['yves', 'corine', 'sedra'])
     lancer_depouillement(dico_candidats)
     afficher_resultats(dico_candidats)
-    enregistrer_resultats('Angers',4, dico_candidats)
+    enregistrer_resultats('Compiègne',19, dico_candidats)
 
 
 
