@@ -62,7 +62,7 @@ class RegionAudio(Region):
     def set_portion(self, debut:int,fin:int):
         if debut >= fin:
             raise ValueError("debut doit être inférieur à fin")
-        if fin - debut > self._fichier.get_duree():
+        if fin > self._fichier.get_duree():
             raise ValueError("fin ne peut pas dépasser la durée du fichier")
         self._debut = debut
         self._fin = fin
@@ -74,13 +74,17 @@ class RegionAudio(Region):
     def get_duree(self) -> int:
         return self._fin - self._debut
 
-    def get_position_fin(self):
+    def get_position_fin(self)->int:
         return self._position + self.get_duree()
 
     def __str__(self) -> str:
         return (f"{self.titre} durée : {self.get_duree()}")
 
-
+    @Region.position.setter
+    def position(self, val: int) -> None:
+        super().position.__set__(self, val)  # Appelle le setter parent
+        if self.get_position_fin() > Region.get_horizon():
+            Region.set_horizon(self.get_position_fin())
 
 
 
