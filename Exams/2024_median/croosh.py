@@ -1,6 +1,13 @@
+class EventFullError(Exception):
+    """Exception levée quand un événement est complet."""
+    pass
+
+
 def creer_evt(prix: float, nb_places_max: int) -> dict:
     if not (isinstance(nb_places_max, int) and nb_places_max > 0):
         raise TypeError("nb_places_max must be an positive integer")
+    if not isinstance(prix, (float, int)) or prix < 0:
+        raise TypeError("prix doit être un nombre positif ou nul")
     return {"prix": prix, "participants": list(), "nb_places_max": nb_places_max}
 
 def retirer_evt(dico_tous_evts:dict, evt:str) -> bool:
@@ -11,11 +18,12 @@ def retirer_evt(dico_tous_evts:dict, evt:str) -> bool:
         return True
 
 def ajouter_participants(dico_tous_evts:dict, evt:str, login:str) -> bool:
+    print(f"Tentative d'ajout de {login} dans: {evt}")
     if evt not in dico_tous_evts.keys():
         raise TypeError("Event not recognized")
-    if not (' ' not in login and len(login) < 8):
+    if ' ' in login or len(login) >= 8:
         raise TypeError("login incorrect")
-    if len(dico_tous_evts[evt]) == dico_tous_evts[evt]['nb_places_max']:
+    if len(dico_tous_evts[evt]['participants']) == dico_tous_evts[evt]['nb_places_max']:
         raise EventFullError("Event full")
     dico_tous_evts[evt]["participants"].append(login)
     return True
@@ -42,11 +50,21 @@ def main():
     dico_evts['evt3'] = evt3
 
     retirer_evt(dico_evts, 'evt3')
-    ajouter_participants(dico_evts, 'evt1', 'yves')
-    ajouter_participants(dico_evts, 'evt1', 'Lina')
-    ajouter_participants(dico_evts, 'evt1', 'joshua')
-    ajouter_participants(dico_evts, 'evt1', 'Sedra')
+    try:
+        ajouter_participants(dico_evts, 'evt1', 'yves')
+        ajouter_participants(dico_evts, 'evt1', 'Lina')
+        ajouter_participants(dico_evts, 'evt1', 'joshua')
+        ajouter_participants(dico_evts, 'evt2', 'Lina')
+        ajouter_participants(dico_evts, 'evt2', 'joshua')
+        # ajouter_participants(dico_evts, 'evt3', 'Lina')
 
+        # ajouter_participants(dico_evts, 'evt1', 'Sedra')
+    except TypeError as e:
+        print(f"Erreur de type : {e}")
+    except EventFullError as e:
+        print(f"Événement complet : {e}")
+
+    print(stats_ventes(dico_evts))
 
 
 
