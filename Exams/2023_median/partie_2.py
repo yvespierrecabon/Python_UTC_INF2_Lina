@@ -15,7 +15,7 @@ class Region:
         self._titre = val
 
     @property
-    def position(self):
+    def position(self) ->int:
         return self._position
 
     @position.setter
@@ -42,8 +42,8 @@ class Region:
 
 class Fichier:
     def __init__(self,titre:str, duree:int) -> None:
-        self._titre = titre
-        self._duree = duree
+        self._titre:str = titre
+        self._duree:int = duree
 
     def get_duree(self) -> int:
         return self._duree
@@ -51,7 +51,7 @@ class Fichier:
 
 
 class RegionAudio(Region):
-    def __init__(self,titre:str, fichier) -> None:
+    def __init__(self,titre:str, fichier:Fichier) -> None:
         super().__init__(titre)
         if not isinstance(fichier, Fichier):
             raise TypeError("Fichier inconnu")
@@ -62,6 +62,8 @@ class RegionAudio(Region):
     def set_portion(self, debut:int,fin:int):
         if debut >= fin:
             raise ValueError("debut doit être inférieur à fin")
+        if fin - debut > self._fichier.get_duree():
+            raise ValueError("fin ne peut pas dépasser la durée du fichier")
         self._debut = debut
         self._fin = fin
         if self.get_position_fin() > Region.get_horizon():
@@ -76,7 +78,7 @@ class RegionAudio(Region):
         return self._position + self.get_duree()
 
     def __str__(self) -> str:
-        return (f"{self.titre} durée : {self.get_duree}")
+        return (f"{self.titre} durée : {self.get_duree()}")
 
 
 
