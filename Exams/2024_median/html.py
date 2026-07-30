@@ -1,9 +1,13 @@
+from astroid.modutils import is_standard_module
+
+
 class Balise:
     def __init__(self, nom: str, attributs: dict | None = None):
         self._nom: str = nom.lower()
-        self._attributs: dict | None = {}
-        if attributs:
+        if attributs is not None:
             self._attributs: dict = attributs
+        else:
+            self._attributs: dict = {}
 
     @property
     def nom(self) -> str:
@@ -14,17 +18,20 @@ class Balise:
         return self._attributs
 
     @attributs.setter
-    def attributs(self, nouveaux_attributs:dict | None):
+    def attributs(self, nouveaux_attributs:dict):
         self._attributs = nouveaux_attributs
 
 
 class BaliseContenu(Balise):
     def __init__(self, nom: str,contenu: list, attributs: dict | None = None ):
-        Balise.__init__(self, nom, attributs)
+        super().__init__(self, nom, attributs)
+        for val in contenu:
+            if not isinstance(val, str) or not isinstance(val, Balise):
+                raise TypeError("Contenu invalide : uniquement texte ou Balise")
         self._contenu:list = contenu
 
     @property
-    def contenu(self) -> str:
+    def contenu(self) -> list:
         return self._contenu
     @contenu.setter
     def contenu(self, contenu: list):
