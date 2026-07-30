@@ -1,6 +1,7 @@
 class Balise:
     def __init__(self, nom: str, attributs: dict | None = None):
         self._nom: str = nom.lower()
+        self._attributs: dict | None = {}
         if attributs:
             self._attributs: dict = attributs
 
@@ -13,15 +14,25 @@ class Balise:
         return self._attributs
 
     @attributs.setter
-    def attributs(self, key, str, val: str):
-        if key in self.attributs:
-            self._attributs[key] = val
+    def attributs(self, nouveaux_attributs:dict | None):
+        self._attributs = nouveaux_attributs
 
 
 class BaliseContenu(Balise):
-    def __init__(self, nom: str, contenu: str, **kwargs):
-        Balise.__init__(self, nom, **kwargs)
-        self.contenu = contenu.lower()
+    def __init__(self, nom: str,contenu: list, attributs: dict | None = None ):
+        Balise.__init__(self, nom, attributs)
+        self._contenu:list = contenu
+
+    @property
+    def contenu(self) -> str:
+        return self._contenu
+    @contenu.setter
+    def contenu(self, contenu: list):
+        if not isinstance(contenu, list):
+            raise TypeError("Contenu must be a list")
+        self._contenu = contenu
+
+
 
 
 def main():
