@@ -1,3 +1,5 @@
+import os.path
+
 
 class Balise:
     def __init__(self, nom: str, attributs: dict | None = None):
@@ -25,6 +27,7 @@ class Balise:
 class BaliseContenu(Balise):
     def __init__(self, nom: str,contenu: list, attributs: dict | None = None ):
         super().__init__(nom, attributs)
+        self._contenu: list
         self.contenu = contenu
 
     @property
@@ -40,7 +43,33 @@ class BaliseContenu(Balise):
         self._contenu:list = contenu
 
 
+class Html(BaliseContenu):
+    def __init__(self, contenu: list, attributs: dict | None = None):
+        super().__init__('html', contenu, attributs)
 
+
+class Titre(BaliseContenu):
+    def __init__(self, contenu: list, attributs: dict | None = None):
+        super().__init__('h1', contenu, attributs)
+
+class Paragraphe(BaliseContenu):
+    def __init__(self, contenu: list, attributs: dict | None = None):
+        super().__init__('p', contenu, attributs)
+
+class Gras(BaliseContenu):
+    def __init__(self, contenu: list, attributs: dict | None = None):
+        super().__init__('b', contenu, attributs)
+
+class Image(Balise):
+    def __init__(self, attributs: dict | None = None):
+        if 'src' in attributs.keys() and os.path.exists(attributs['src']):
+            super().__init__('img', attributs)
+            self._path:str = attributs['src']
+        else:
+            raise ValueError("pas d'attribut src ou chemin incorrect")
+
+
+ 
 
 def main():
     pass
