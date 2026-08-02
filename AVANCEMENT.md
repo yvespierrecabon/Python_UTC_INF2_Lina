@@ -5,6 +5,34 @@
 
 ---
 
+### **Session du 02-08-2026**
+
+#### **Actions Réalisées**
+- **15:46** : **Analyse et corrections de `Exams/2024_median/html.py`** (exercice 3 du Médian 2024).
+  - **Objectif** : Vérifier la conformité du code avec l'énoncé (classes `Balise`, `BaliseContenu`, `Html`, `Titre`, `Paragraphe`, `Gras`, `Image`).
+  - **Fichiers Analysés** :
+    - `Exams/2024_median/html.py` (code utilisateur).
+    - `Exams/2024_median/Médian-p2024.pdf` (énoncé).
+  - **Résultat** :
+    - **Points forts** :
+      - ✅ Compteur de balises (`Balise._compteur`) implémenté et fonctionnel.
+      - ✅ `Image.__str__` corrigé pour générer `<img src="...">` (balise vide).
+      - ✅ Centralisation de `__str__` dans `BaliseContenu` (évite la duplication de code).
+      - ✅ `Titre` utilise maintenant `niveau` pour le nom de la balise.
+      - ✅ Vérification de l'existence du fichier `src` pour `Image`.
+    - **Problèmes identifiés** :
+      - ⚠️ **Compteur à 5 balises au lieu de 6** : `texte_gras_1` est réutilisé 2 fois dans `main()` (1 objet `Gras` utilisé 2 fois).
+        **Solution** : Créer un 2ème objet `Gras` ou ajouter une balise supplémentaire.
+      - ⚠️ **Typage de `niveau` dans `Titre`** : Actuellement `str`, devrait être `int` avec validation (1-6).
+      - ⚠️ **`main()` ne correspond pas exactement à la Figure 1** : Ajouter une balise pour atteindre 6.
+  - **Statut** : 🔄 Analyse terminée (corrections mineures en attente).
+
+- **15:46** : **Ajout du fichier `20230416_001.jpg`** dans `Exams/2024_median/`.
+  - **Objectif** : Permettre le test de la classe `Image` avec un fichier valide.
+  - **Statut** : ✅ Terminé
+
+---
+
 ### **Session du 25-07-2026**
 
 #### **Actions Réalisées**
@@ -167,23 +195,29 @@
 
 | **Type**          | **Nombre** | **Dernière Action**       |
 |-------------------|------------|---------------------------|
-| Analyse de code   | 3          | 21-07-2026 (TD3/Q3.py - décorateur `nombre`) |
+| Analyse de code   | 4          | 02-08-2026 (`Exams/2024_median/html.py` - exercice 3) |
 | Réorganisation    | 1          | 20-07-2026 (TD1/ et TD2/)  |
-| Mise à jour documentation | 2      | 25-07-2026 (CONTEXT.md et AVANCEMENT.md) |
+| Mise à jour documentation | 3      | 02-08-2026 (CONTEXT.md et AVANCEMENT.md) |
 | Création de fichiers | 2      | 20-07-2026 (CONTEXT/AVANCEMENT) |
 | Suppression        | 1          | 20-07-2026 (main.py)      |
 | Ajout de TP/TD     | 1          | 25-07-2026 (TP3_Objets/)  |
+| Ajout de ressources | 1          | 02-08-2026 (`20230416_001.jpg`) |
 
 ---
 
 ## **Tâches en Cours**
 *À mettre à jour si une tâche est interrompue*
-- Aucune tâche en cours.
+- **Analyse et corrections de `Exams/2024_median/html.py`** (exercice 3 du Médian 2024) :
+  - **Statut** : 🔄 En cours (5/6 balises affichées, corrections mineures restantes).
+  - **Prochaines étapes** :
+    - [ ] Corriger `main()` pour afficher **6 balises** (créer un 2ème objet `Gras` ou ajouter une balise).
+    - [ ] Valider le typage de `niveau` dans `Titre` (`int` au lieu de `str`).
 
 ---
 
 ## **Calendrier des Sessions**
 *Optionnel : pour suivre la fréquence des sessions*
+- **02-08-2026** : Session 8 (Analyse et corrections de `Exams/2024_median/html.py`)
 - **25-07-2026** : Session 7 (Ajout de TP3_Objets/)
 - **21-07-2026** : Session 6 (Analyse du décorateur `nombre` dans TD3/Q3.py)
 - **21-07-2026** : Session 5 (Mise à jour de CONTEXT.md et analyse de TD2/Q2.py)
@@ -206,4 +240,4 @@
 
 ---
 
-*Dernière modification : 25-07-2026*
+*Dernière modification : 02-08-2026*

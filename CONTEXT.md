@@ -67,6 +67,17 @@
   - `poupees_russes.py` : Implémentation des poupées russes.
   - `rectangle.py` : Implémentation de la classe Rectangle.
 
+- **`Exams/`** : Contient les examens et partiels.
+  - **`2024_median/`** : Examen médian de 2024.
+    - `Médian-p2024.pdf` : Énoncé de l'examen (inclut l'exercice 3 sur le HTML).
+    - `html.py` : **Implémentation en cours** des classes pour générer du HTML (exercice 3).
+      - **Classes** : `Balise`, `BaliseContenu`, `Html`, `Titre`, `Paragraphe`, `Gras`, `Image`.
+      - **Fonctionnalités** :
+        - Compteur de balises (`Balise._compteur`).
+        - Génération de code HTML valide via `__str__`.
+        - Vérification des attributs (ex: `src` pour `Image`).
+    - `20230416_001.jpg` : Image de test pour la classe `Image`.
+
 ### **Ancien fichier supprimé**
 - `main.py` : **Supprimé le 20-07-2026** (remplacé par les fichiers `Qx.py` séparés).
 
@@ -124,7 +135,15 @@
 - [ ] Ajouter des tests unitaires pour valider les solutions.
 - [ ] Vérifier la cohérence des fichiers `Qx.py` avec les énoncés des TDs.
 - [ ] Analyser les fichiers du **TP3_Objets** (pokemons.py, poupees_russes.py, rectangle.py).
+- [ ] **Finaliser l'exercice 3 de `Exams/2024_median/html.py`** :
+  - [x] Implémenter les classes `Balise`, `BaliseContenu`, `Html`, `Titre`, `Paragraphe`, `Gras`, `Image`.
+  - [x] Ajouter un compteur de balises (`Balise._compteur`).
+  - [x] Centraliser `__str__` dans `BaliseContenu` pour éviter la duplication de code.
+  - [x] Vérifier l'existence du fichier `src` pour `Image`.
+  - [ ] **Corriger `main()`** pour afficher **6 balises** (actuellement 5).
+    - **Solution** : Créer un 2ème objet `Gras` ou ajouter une balise supplémentaire (ex: `Paragraphe`).
+  - [ ] Valider le typage de `niveau` dans `Titre` (changer `str` en `int` avec validation 1-6).
 
 ---
 
-*Dernière modification : 25-07-2026*
+*Dernière modification : 02-08-2026*
