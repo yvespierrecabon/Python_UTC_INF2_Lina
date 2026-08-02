@@ -2,7 +2,9 @@ import os.path
 
 
 class Balise:
+    _compteur = 0
     def __init__(self, nom: str, attributs: dict | None = None):
+        Balise._compteur += 1
         self._nom: str = nom.lower()
         if attributs is not None:
             self._attributs: dict = attributs
@@ -49,10 +51,8 @@ class Html(BaliseContenu):
         
     def __str__(self):
         attrs = ""
-        if len(self.attributs) >0:
-            attrs=" "
-            for k,v in self.attributs.items():
-                attrs += f"{k}='{v}' "
+        if self.attributs:
+            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
         texte = f"<html{attrs}>\n"
         for contenu_ in self.contenu:
             texte += f"{contenu_}\n"
@@ -61,19 +61,18 @@ class Html(BaliseContenu):
 
 
 class Titre(BaliseContenu):
-    def __init__(self, contenu: list, attributs: dict | None = None):
+    def __init__(self, niveau:str, contenu: list, attributs: dict | None = None):
         super().__init__('h1', contenu, attributs)
+        self.niveau = niveau
 
     def __str__(self):
         attrs = ""
-        if len(self.attributs) >0:
-            attrs=" "
-            for k,v in self.attributs.items():
-                attrs += f"{k}='{v}' "
-        texte = f"<h1{attrs}"
+        if self.attributs:
+            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
+        texte = f"<{self.niveau}{attrs}"
         for contenu_ in self.contenu:
             texte += f"{contenu_}\n"
-        return texte + "</h1>"
+        return texte + f"</{self.niveau}>"
 
 class Paragraphe(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
@@ -81,15 +80,13 @@ class Paragraphe(BaliseContenu):
 
     def __str__(self):
         attrs = ""
-        if len(self.attributs) >0:
-            attrs=" "
-            for k,v in self.attributs.items():
-                attrs += f"{k}='{v}' "
-            texte = f"<p{attrs}>\n"
+        if self.attributs:
+            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
+        texte = f"<p{attrs}>\n"
 
-            for contenu_ in self.contenu:
-                texte += f"{contenu_}\n"
-            return texte + "</p>"
+        for contenu_ in self.contenu:
+            texte += f"{contenu_}\n"
+        return texte + "</p>"
 
 
 class Gras(BaliseContenu):
@@ -98,10 +95,8 @@ class Gras(BaliseContenu):
 
     def __str__(self):
         attrs = ""
-        if len(self.attributs) >0:
-            attrs=" "
-            for k,v in self.attributs.items():
-                attrs += f"{k}='{v}' "
+        if self.attributs:
+            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
         texte = f"<b{attrs}>\n"
         for contenu_ in self.contenu:
             texte += f"{contenu_}\n"
@@ -110,22 +105,29 @@ class Gras(BaliseContenu):
 
 class Image(Balise):
     def __init__(self, attributs: dict | None = None):
-        if 'src' in attributs.keys() and os.path.exists(attributs['src']):
-            super().__init__('img', attributs)
-            self._path:str = attributs['src']
-        else:
+        if attributs is None:
+            attributs = {}
+        if 'src' not in attributs or not os.path.exists(attributs['src']):
             raise ValueError("pas d'attribut src ou chemin incorrect")
+        super().__init__('img', attributs)
+
+    def __str__(self):
+        attrs = ""
+        if self.attributs:
+            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
+        return f"<img{attrs}>"
 
 
 
 
 def main():
 
-    titre_1= Titre(["Mon titre"])
+    titre_1= Titre("h2",["Mon titre"])
     texte_gras_1 = Gras(["bout de paragraphe écrit en gras"])
     paragraphe_1= Paragraphe(["bout de paragraphe normal",texte_gras_1], {"style":"color:blue"})
-    html_1= Html([titre_1,paragraphe_1, 'ceci est un texte en html', '1'],{'test':'test1'})
+    html_1= Html([titre_1,paragraphe_1, 'ceci est un texte en html', '1'])
     print(html_1)
+    print(f"\nCe texte comporte {Balise._compteur} balises")
 
 
 if __name__ == '__main__':
