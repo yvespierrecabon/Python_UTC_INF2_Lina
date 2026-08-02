@@ -25,6 +25,9 @@ class Balise:
             raise TypeError("attribut doit être un dictionnaire")
         self._attributs = nouveaux_attributs
 
+    def __str__(self):
+        attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items()) if self.attributs else ""
+        return f"<{self.nom}{attrs}>"
 
 class BaliseContenu(Balise):
     def __init__(self, nom: str,contenu: list, attributs: dict | None = None ):
@@ -44,63 +47,31 @@ class BaliseContenu(Balise):
                 raise TypeError("Contenu invalide : uniquement texte ou Balise")
         self._contenu:list = contenu
 
+    def __str__(self):
+        attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items()) if self.attributs else ""
+        contenu_str = "\n".join(str(c) for c in self.contenu)
+        return f"<{self.nom}{attrs}>\n{contenu_str}\n</{self.nom}>"
 
 class Html(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('html', contenu, attributs)
-        
-    def __str__(self):
-        attrs = ""
-        if self.attributs:
-            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
-        texte = f"<html{attrs}>\n"
-        for contenu_ in self.contenu:
-            texte += f"{contenu_}\n"
-        return texte + "</html>"
-        
 
 
 class Titre(BaliseContenu):
     def __init__(self, niveau:str, contenu: list, attributs: dict | None = None):
-        super().__init__('h1', contenu, attributs)
-        self.niveau = niveau
+        super().__init__(niveau, contenu, attributs)
+        # self.niveau = niveau
 
-    def __str__(self):
-        attrs = ""
-        if self.attributs:
-            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
-        texte = f"<{self.niveau}{attrs}"
-        for contenu_ in self.contenu:
-            texte += f"{contenu_}\n"
-        return texte + f"</{self.niveau}>"
 
 class Paragraphe(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('p', contenu, attributs)
-
-    def __str__(self):
-        attrs = ""
-        if self.attributs:
-            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
-        texte = f"<p{attrs}>\n"
-
-        for contenu_ in self.contenu:
-            texte += f"{contenu_}\n"
-        return texte + "</p>"
 
 
 class Gras(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('b', contenu, attributs)
 
-    def __str__(self):
-        attrs = ""
-        if self.attributs:
-            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
-        texte = f"<b{attrs}>\n"
-        for contenu_ in self.contenu:
-            texte += f"{contenu_}\n"
-        return texte + "</b>"
 
 
 class Image(Balise):
@@ -111,13 +82,6 @@ class Image(Balise):
             raise ValueError("pas d'attribut src ou chemin incorrect")
         super().__init__('img', attributs)
 
-    def __str__(self):
-        attrs = ""
-        if self.attributs:
-            attrs = " " + " ".join(f'{k}="{v}"' for k, v in self.attributs.items())
-        return f"<img{attrs}>"
-
-
 
 
 def main():
@@ -125,7 +89,8 @@ def main():
     titre_1= Titre("h2",["Mon titre"])
     texte_gras_1 = Gras(["bout de paragraphe écrit en gras"])
     paragraphe_1= Paragraphe(["bout de paragraphe normal",texte_gras_1], {"style":"color:blue"})
-    html_1= Html([titre_1,paragraphe_1, 'ceci est un texte en html', '1'])
+    img_1= Image({'src':'20230416_001.jpg','width':'200','height':'120'})
+    html_1= Html([titre_1,paragraphe_1,img_1,texte_gras_1])
     print(html_1)
     print(f"\nCe texte comporte {Balise._compteur} balises")
 
