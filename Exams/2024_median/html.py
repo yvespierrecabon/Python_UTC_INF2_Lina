@@ -46,19 +46,67 @@ class BaliseContenu(Balise):
 class Html(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('html', contenu, attributs)
+        
+    def __str__(self):
+        attrs = ""
+        if len(self.attributs) >0:
+            attrs=" "
+            for k,v in self.attributs.items():
+                attrs += f"{k}='{v}' "
+        texte = f"<html{attrs}>\n"
+        for contenu_ in self.contenu:
+            texte += f"{contenu_}\n"
+        return texte + "</html>"
+        
 
 
 class Titre(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('h1', contenu, attributs)
 
+    def __str__(self):
+        attrs = ""
+        if len(self.attributs) >0:
+            attrs=" "
+            for k,v in self.attributs.items():
+                attrs += f"{k}='{v}' "
+        texte = f"<h1{attrs}"
+        for contenu_ in self.contenu:
+            texte += f"{contenu_}\n"
+        return texte + "</h1>"
+
 class Paragraphe(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('p', contenu, attributs)
 
+    def __str__(self):
+        attrs = ""
+        if len(self.attributs) >0:
+            attrs=" "
+            for k,v in self.attributs.items():
+                attrs += f"{k}='{v}' "
+            texte = f"<p{attrs}>\n"
+
+            for contenu_ in self.contenu:
+                texte += f"{contenu_}\n"
+            return texte + "</p>"
+
+
 class Gras(BaliseContenu):
     def __init__(self, contenu: list, attributs: dict | None = None):
         super().__init__('b', contenu, attributs)
+
+    def __str__(self):
+        attrs = ""
+        if len(self.attributs) >0:
+            attrs=" "
+            for k,v in self.attributs.items():
+                attrs += f"{k}='{v}' "
+        texte = f"<b{attrs}>\n"
+        for contenu_ in self.contenu:
+            texte += f"{contenu_}\n"
+        return texte + "</b>"
+
 
 class Image(Balise):
     def __init__(self, attributs: dict | None = None):
@@ -69,10 +117,15 @@ class Image(Balise):
             raise ValueError("pas d'attribut src ou chemin incorrect")
 
 
- 
+
 
 def main():
-    pass
+
+    titre_1= Titre(["Mon titre"])
+    texte_gras_1 = Gras(["bout de paragraphe écrit en gras"])
+    paragraphe_1= Paragraphe(["bout de paragraphe normal",texte_gras_1], {"style":"color:blue"})
+    html_1= Html([titre_1,paragraphe_1, 'ceci est un texte en html', '1'],{'test':'test1'})
+    print(html_1)
 
 
 if __name__ == '__main__':
