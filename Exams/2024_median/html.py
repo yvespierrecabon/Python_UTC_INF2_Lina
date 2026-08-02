@@ -88,9 +88,10 @@ def main():
 
     titre_1= Titre("h2",["Mon titre"])
     texte_gras_1 = Gras(["bout de paragraphe écrit en gras"])
+    texte_gras_2 = Gras(["bout de paragraphe écrit en gras"])
     paragraphe_1= Paragraphe(["bout de paragraphe normal",texte_gras_1], {"style":"color:blue"})
     img_1= Image({'src':'20230416_001.jpg','width':'200','height':'120'})
-    html_1= Html([titre_1,paragraphe_1,img_1,texte_gras_1])
+    html_1= Html([titre_1,paragraphe_1,img_1,texte_gras_2])
     print(html_1)
     print(f"\nCe texte comporte {Balise._compteur} balises")
 
