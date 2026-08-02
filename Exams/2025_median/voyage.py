@@ -25,7 +25,7 @@ class Voyage:
         self._cout = cout# This is a sample Python script.
 
     @duree.setter
-    def duree(self, duree:float):
+    def duree(self, duree:int):
         self._duree = duree
 
     def __str__(self):
@@ -58,14 +58,17 @@ class VoyageOrganise(Voyage):
         txt += f"Prix total : {cout_total:.02f} Euros\n"
         return txt
 
-    def __add__(self, other):
-        self.destination += ", "+other.destination
-        self.cout += other.cout
-        self.duree += (1 + other.duree)
-        self._nb_voyageurs += other._nb_voyageurs
-        self._activites.update(other._activites)
-        return self
 
+    def __add__(self, other):
+        if not isinstance(other, VoyageOrganise):
+            raise TypeError("L'addition n'est possible qu'avec un autre VoyageOrganise")
+        new_destination = f"{self.destination}, {other.destination}"
+        new_cout = self.cout + other.cout
+        new_duree = 1+ self.duree + other.duree
+        new_voyage = VoyageOrganise(new_destination, new_cout, new_duree)
+        new_voyage._nb_voyageurs = self._nb_voyageurs + other._nb_voyageurs
+        new_voyage._activites = {**self._activites, **other._activites}
+        return new_voyage
 
 
 
@@ -89,11 +92,11 @@ def main():
 
     try:
         voyage_3 = voyage_org_1 + voyage_org_2
-    except TypeError():
-        print()
-        
+    except TypeError:
+        print("Erreur : addition impossible")
+    else:
+        print(voyage_3)
 
-    print(voyage_3)
 if __name__ == '__main__':
     main()
 
