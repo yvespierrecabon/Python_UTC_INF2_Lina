@@ -17,17 +17,17 @@ def detection_fraude(fonction):
 @detection_fraude
 def ajoute_bureau(bureau:dict,ville:list) -> None:
     bureaux_enregistres = [bureau['numero'] for bureau in ville]
-    print(bureaux_enregistres)
-    if bureau['numero'] not in bureaux_enregistres:
-        ville.append(bureau)
+    if bureau['numero']  in bureaux_enregistres:
+        print(f"résultat du bureau {bureau['numero']} déjà saisi")
     else:
-        print(f"résultat du bureau {bureau['numero']} déjà saisis")
+        ville.append(bureau)
+
 
 def ajoute_bureaux(*args, ville:list) -> None:
     for arg in args:
         ajoute_bureau(arg, ville)
 
-@detection_fraude
+
 def taux_participation(bureau:dict) -> float:
     return 100*sum(bureau['votes'].values())/bureau['inscrits']
 
@@ -72,7 +72,8 @@ def main():
 
     print(total_candidats(ville))
     print('Meilleur taux de participation :',meilleur_taux(ville))
-    print(candidats_second_tour(ville, 32))
+    SEUIL_SECOND_TOUR = 32
+    print(candidats_second_tour(ville, SEUIL_SECOND_TOUR))
 
 
 
