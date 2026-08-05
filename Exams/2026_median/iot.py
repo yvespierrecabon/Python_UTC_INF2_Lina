@@ -27,10 +27,11 @@ class EquipementIoT:
 
     def ajouter_protocole(self, *args):
         for protocole in args:
-            self._protocoles.append(protocole)
+            if protocole not in self._protocoles:
+                self._protocoles.append(protocole)
 
     def __str__(self):
-       return f'EquipementIoT : ({self._id}, {self.nom})'
+       return f'{self._id}, {self._nom}'
 
 
 class CapteurIoT(EquipementIoT):
@@ -40,6 +41,7 @@ class CapteurIoT(EquipementIoT):
 
     def collecte(self):
         self._mesure = randint(0,100)
+        return self._mesure
 
 class ActionneurIoT(EquipementIoT):
     def __init__(self, id:int, nom:str, etat:str="OFF"):
@@ -49,13 +51,13 @@ class ActionneurIoT(EquipementIoT):
     def collecte(self):
         return self._etat
 
-class NoeudIot(EquipementIoT):
+class NoeudIoT(EquipementIoT):
     def __init__(self, id:int, nom:str):
         super().__init__(id, nom)
         self._equipements=[]
 
     def connecter(self, e:'EquipementIoT') -> None:
-        if isinstance(e, EquipementIoT) and list(set(self._protocoles) & set(e._protocoles)) :
+        if isinstance(e, EquipementIoT) and set(self._protocoles) & set(e._protocoles) :
             self._equipements.append(e)
             print(f'Connexion réussie pour {e}')
         else:
@@ -64,17 +66,20 @@ class NoeudIot(EquipementIoT):
     def collecte(self) -> dict:
         dico ={}
         for equipement in self._equipements:
-            if (isinstance(equipement, CapteurIoT | ActionneurIoT)):
+            if (isinstance(equipement, (CapteurIoT , ActionneurIoT))):
                 dico[equipement.id] = equipement.collecte()
-            elif isinstance(equipement, NoeudIot):
-                dico[equipement.id] = equipement._equipements
+            elif isinstance(equipement, NoeudIoT):
+                dico[equipement.id] = equipement.collecte()
         return dico
 
 
-    def __add__(self, noeudIot:'NoeudIot'):
-        noeudIoT_fusion = NoeudIot(self.id + noeudIot.id, self.nom + noeudIot.nom)
-        noeudIoT_fusion._protocoles = list(set(self._protocoles + noeudIot._protocoles))
-        noeudIoT_fusion._equipements = list(set(self._equipements + noeudIot._equipements))
+    def __add__(self, noeudIoT:'NoeudIoT'):
+        noeudIoT_fusion = NoeudIoT(self.id + noeudIoT.id, self.nom + noeudIoT.nom)
+        noeudIoT_fusion._protocoles = list(set(self._protocoles + noeudIoT._protocoles))
+        fusion_equipements = self._equipements + noeudIoT._equipements
+        for equipement in fusion_equipements:
+            if equipement not in noeudIoT_fusion._equipements:
+                noeudIoT_fusion._equipements.append(equipement)
         return noeudIoT_fusion
 
 
@@ -83,24 +88,24 @@ def main():
     protocoles = ["ble", "zigbee","wifi","uwb","loran"]
     thermometre = CapteurIoT(25,"Température")
     thermometre.ajouter_protocole("wifi")
-    luninosite = CapteurIoT(2, "Luminosité")
-    luninosite.ajouter_protocole("wifi")
+    luminosite = CapteurIoT(2, "Luminosité")
+    luminosite.ajouter_protocole("wifi")
     ventilo = ActionneurIoT(47, "Ventilateur")
     ventilo.ajouter_protocole("wifi")
     led = ActionneurIoT(10, "Lumière")
     # led.ajouter_protocole("wifi")
-    noeud_a = NoeudIot(6, "routeur_hall")
+    noeud_a = NoeudIoT(6, "routeur_hall")
     noeud_a.ajouter_protocole("wifi")
 
-    noeud_b = NoeudIot(7, "routeur_salle")
+    noeud_b = NoeudIoT(7, "routeur_salle")
     noeud_b.ajouter_protocole("ble", "zigbee", "wifi")
     noeud_b.connecter(thermometre)
     noeud_b.connecter(ventilo)
     noeud_b.connecter(led)
-    noeud_b.connecter(luninosite)
+    noeud_b.connecter(luminosite)
 
-    noeud_lab:NoeudIot = noeud_a + noeud_b
-    noeud_lab.nom = "routeur labo"
+    noeud_lab:NoeudIoT = noeud_a + noeud_b
+    noeud_lab.nom = "routeur_labo"
     print(noeud_lab)
     print('Equipements connectés:')
     for id, collecte in noeud_lab.collecte().items():
