@@ -1,7 +1,5 @@
 from random import randint
 
-from pyasn1_modules.rfc2251 import AssertionValue
-
 
 class EquipementIoT:
     def __init__(self, id:int, nom:str):
@@ -78,7 +76,7 @@ class NoeudIoT(EquipementIoT):
         noeudIoT_fusion._protocoles = list(set(self._protocoles + noeudIoT._protocoles))
         fusion_equipements = self._equipements + noeudIoT._equipements
         for equipement in fusion_equipements:
-            if equipement not in noeudIoT_fusion._equipements:
+            if equipement.id not in [eq.id for eq in noeudIoT_fusion._equipements]:
                 noeudIoT_fusion._equipements.append(equipement)
         return noeudIoT_fusion
 
