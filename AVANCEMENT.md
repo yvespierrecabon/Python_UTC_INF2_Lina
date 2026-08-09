@@ -5,6 +5,27 @@
 
 ---
 
+### **Session du 09-08-2026**
+
+#### **Actions Réalisées**
+- **10:00** : **Ajout du fichier `Exams/2021_finaux/approximation_de_fonction.py`** (exercice d'approximation de fonction avec `numpy.linalg.lstsq`).
+  - **Objectif** : Implémenter une approximation de la fonction `f(x) = c1 * exp(-x) + c2 * x` à partir d'un échantillon perturbé.
+  - **Fichiers Ajoutés** :
+    - `Exams/2021_finaux/approximation_de_fonction.py` (code utilisateur).
+  - **Fonctionnalités** :
+    - Génération d'un échantillon perturbé à partir de `f(x, 5, 2)`.
+    - Utilisation de `np.linalg.lstsq` pour estimer les coefficients `c1` et `c2`.
+    - Affichage des courbes (fonction exacte, échantillon, approximation) avec `matplotlib`.
+  - **Statut** : ✅ Terminé
+
+- **09:50** : **Correction du fichier `Exams/2021_finaux/graphisme.py`** (mise à jour des labels pour les cercles et lignes).
+  - **Objectif** : Corriger l'affichage des compteurs de cercles et lignes dans l'interface graphique.
+  - **Problème** : Les labels `self.label_cercles` et `self.label_lignes` n'étaient pas mis à jour après incrémentation.
+  - **Solution** : Ajout de `self.label_cercles.config(text=...)` et `self.label_lignes.config(text=...)` dans `dessine_cercles` et `dessine_lignes`.
+  - **Statut** : ✅ Terminé
+
+---
+
 ### **Session du 02-08-2026**
 
 #### **Actions Réalisées**
@@ -195,7 +216,7 @@
 
 | **Type**          | **Nombre** | **Dernière Action**       |
 |-------------------|------------|---------------------------|
-| Analyse de code   | 4          | 02-08-2026 (`Exams/2024_median/html.py` - exercice 3) |
+| Analyse de code   | 5          | 09-08-2026 (`Exams/2021_finaux/approximation_de_fonction.py`) |
 | Réorganisation    | 1          | 20-07-2026 (TD1/ et TD2/)  |
 | Mise à jour documentation | 3      | 02-08-2026 (CONTEXT.md et AVANCEMENT.md) |
 | Création de fichiers | 2      | 20-07-2026 (CONTEXT/AVANCEMENT) |
@@ -217,6 +238,7 @@
 
 ## **Calendrier des Sessions**
 *Optionnel : pour suivre la fréquence des sessions*
+- **09-08-2026** : Session 9 (Ajout de `Exams/2021_finaux/approximation_de_fonction.py` et correction de `graphisme.py`)
 - **02-08-2026** : Session 8 (Analyse et corrections de `Exams/2024_median/html.py`)
 - **25-07-2026** : Session 7 (Ajout de TP3_Objets/)
 - **21-07-2026** : Session 6 (Analyse du décorateur `nombre` dans TD3/Q3.py)
@@ -240,4 +262,4 @@
 
 ---
 
-*Dernière modification : 02-08-2026*
+*Dernière modification : 09-08-2026*
