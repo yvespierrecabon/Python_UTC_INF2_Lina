@@ -34,14 +34,17 @@ class AppliCanevas(tk.Tk):
     def dessine_cercles(self):
         n = rd.randint(1,10)
         self.__nb_cercles += n
+        self.label_cercles.config(text=f"{self.__nb_cercles} cercles")
         for i in range(n):
             x,y  = (rd.randint(1,self.size) for j in range (2))
             diameter = rd.randint(1,50)
             self.canv.create_oval(x,y,x+diameter, y+diameter, fill=self.rd_couleurs())
 
+
     def dessine_lignes(self):
         n = rd.randint(1,10)
         self.__nb_lignes += n
+        self.label_lignes.config(text=f"{self.__nb_lignes} lignes")
         for i in range(n):
             x,y,x2,y2 = (rd.randint(1,self.size) for j in range (4))
             self.canv.create_line(x,y,x2,y2,fill=self.rd_couleurs())
