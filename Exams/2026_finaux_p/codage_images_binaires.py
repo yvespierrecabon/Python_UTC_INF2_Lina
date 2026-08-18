@@ -44,6 +44,31 @@ class Image_binaire:
         plt.imshow(self.get_image())
         plt.show()
 
+class NoeudBinaire(Image_binaire):
+    nb_noeuds:int = 0
+
+    def __init__(self,image:np.ndarray, profondeur=0):
+        super().__init__(image)
+        self._prof = profondeur
+        NoeudBinaire.nb_noeuds +=1
+        self._fils:list = []
+
+        if not self.est_unicolor() and self.est_divisible():
+            im1,im2,im3,im4 = self.diviser()
+            self._fils.append(NoeudBinaire(im1))
+            self._fils.append(NoeudBinaire(im2))
+            self._fils.append(NoeudBinaire(im3))
+            self._fils.append(NoeudBinaire(im4))
+            NoeudBinaire.nb_noeuds +=4
+
+
+    def max_prof(self):
+        if len(self._fils) == 0:
+            return 1
+        return 1 + self._fils[0].max_prof()
+
+
+
 def main():
     im = plt.imread("fleurs.jpg")
 
@@ -69,7 +94,10 @@ def main():
 
     plt.show()
 
+    noeud_binaire = NoeudBinaire(im)
 
+    print(f"Nb de noeuds : {NoeudBinaire.nb_noeuds}")
+    print(f"Profondeur max : {noeud_binaire.max_prof()}")
 
 if __name__ == "__main__":
     main()
