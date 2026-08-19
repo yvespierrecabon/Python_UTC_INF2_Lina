@@ -1,0 +1,6 @@
+---JOURNAL DES CRUES DU 19/08/2026---
+ALERTE [16:27:56] Granville : niveau 8.36 m
+ALERTE [16:27:56] Paris : niveau 8.61 m
+ALERTE [16:28:01] Granville : niveau 8.45 m
+ALERTE [16:28:18] Paris : niveau 8.49 m
+ALERTE [16:28:18] Angers : niveau 10.03 m

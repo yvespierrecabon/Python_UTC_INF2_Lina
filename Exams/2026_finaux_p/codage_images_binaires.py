@@ -65,7 +65,7 @@ class NoeudBinaire(Image_binaire):
     def max_prof(self):
         if len(self._fils) == 0:
             return 1
-        return 1 + self._fils[0].max_prof()
+        return 1 + max(self._fils[0].max_prof(),max(self._fils[1].max_prof(),max(self._fils[2].max_prof(),self._fils[3].max_prof())))
 
 
 
